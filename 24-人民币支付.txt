@@ -1,0 +1,23 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int done(int N, int money)
+{
+	int Sum = 0;
+	Sum = N / money;
+	cout << Sum << endl;
+	return N - Sum * money;
+}
+
+int main()
+{
+	int n = 0, sum = 0;
+	cin >> n;
+	n = done(n, 100);
+	n = done(n, 50);
+	n = done(n, 20);
+	n = done(n, 10);
+	n = done(n, 5);
+	n = done(n, 1);
+	return 0;
+}

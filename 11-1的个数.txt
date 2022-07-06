@@ -1,0 +1,39 @@
+#include<iostream>
+using namespace std;
+
+void done()
+{
+	int x = 0, sum = 1;
+	cin >> x;
+	switch (x)
+	{
+		case 0:cout << 0 << endl; break;
+		case 1:cout << 1 << endl; break;
+		default:
+		{
+			while (x / 2 != 1)
+			{
+				if (x % 2 == 1) sum++;
+				x = x / 2;
+				if (x == 3)
+				{
+					sum++;
+					break;
+				}
+			}
+			cout << sum << endl; break;
+		}
+	}
+}
+
+int main()
+{
+	int n = 0;
+	cin >> n;
+	getchar();
+	for (int i = 0; i < n; i++)
+	{
+		done();
+	}
+	return 0;
+}

@@ -1,0 +1,69 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+
+double done(double a1, double a2, double a3, double b1, double b2, double b3)//计算两点间距离
+{
+	double A = 0, B = 0, C = 0;
+	A = a1 - b1;
+	B = a2 - b2;
+	C = a3 - b3;
+	return sqrt(A * A + B * B + C * C);
+}
+
+
+int main()
+{
+	int n = 0, a[11][3] = {}; //定义和赋值点的二维数组
+	cin >> n;
+	getchar();
+	for (int i = 0; i < n; i++)
+	{
+		cin >> a[i][0];
+		cin >> a[i][1];
+		cin >> a[i][2];
+	}
+
+
+	int N = 0, flag = 0;  //定义和计算距离的二维数组（点1，点2，距离）
+	double b[46][3] = {};     
+	N = n * (n - 1) / 2;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			b[flag][0] = i;
+			b[flag][1] = j;
+			b[flag][2] = done(a[i][0], a[i][1], a[i][2], a[j][0], a[j][1], a[j][2]);
+			flag++;
+		}
+	}
+
+
+	while (true)
+	{
+		double max = 0;
+		int p1 = 0, p2 = 0;
+		for (int i = 0; i < N; i++)  //找距离最大值
+		{
+			if (max < b[i][2]) max = b[i][2];
+		}
+		if (max != 0)
+		{
+			for (int i = 0; i < N; i++) //输出距离最大值
+			{
+				if (b[i][2] == max)
+				{
+					p1 = b[i][0];
+					p2 = b[i][1];
+					printf("(%d,%d,%d)-(%d,%d,%d)=%.2f\n", a[p1][0], a[p1][1], a[p1][2],
+						a[p2][0], a[p2][1], a[p2][2], b[i][2]);
+					b[i][2] = 0;
+				}
+			}
+		}
+		else break;
+	}
+	return 0;
+}

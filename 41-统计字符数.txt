@@ -1,0 +1,41 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+
+int main()
+{
+	int n = 0;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		int a[26] = {};
+		char s[1001] = {};
+		cin >> s;	
+		for (int j = 0; j < 1001; j++)
+		{
+			if (s[j] == '\0') break;
+			else
+			{
+				a[((int)s[j]) - 97]++;
+			}
+		}
+
+
+		int max = 0;
+		for (int j = 0; j < 26; j++)
+		{
+			if (max < a[j]) max = a[j];
+		}
+		for (int j = 0; j < 26; j++)
+		{
+			if (a[j] == max)
+			{
+				printf("%c %d\n", (char)(97 + j), max);
+				break;
+			}
+		}
+		getchar();
+	}
+	return 0;
+}

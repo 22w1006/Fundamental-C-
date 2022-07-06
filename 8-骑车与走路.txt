@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int n = 0;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		float m = 0, walk = 0, bike = 0;
+		cin >> m;
+		walk = m / 1.2;
+		bike = 27 + m / 3.0 + 23;
+		if (walk < bike) printf("Walk\n");
+		else if (walk > bike) printf("Bike\n");
+		else printf("All\n");
+	}
+	return 0;
+}

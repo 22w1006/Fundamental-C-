@@ -1,0 +1,63 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+
+
+struct room {
+	int number = 0;
+	room* next = NULL;
+};
+
+
+int main()
+{
+	//输入，创建链表
+	int n = 0;
+	room* temp = NULL, *follow = NULL;
+	room* Head = new room;
+	temp = Head;
+	cin >> n;
+	for (int i = 0; i < n-1; i++) {
+		cin >> temp->number;
+		temp->next = new room;
+		temp = temp->next;
+	}
+	cin >> temp->number;
+	temp->next = NULL;
+
+
+	int s = 0;
+	cin >> s;
+	temp = Head;
+	for (int i = 0; i < n; i++) {
+		if (temp == NULL) break;
+		if (Head->number == s) {
+			Head = Head->next;
+			i--;
+			n--;
+			temp = Head;
+		}
+		else if (temp->number == s) {
+			follow->next = temp->next;
+			temp = follow->next;
+		}
+		else {
+			follow = temp;
+			temp = temp->next;
+		}
+	}
+
+	if (n == 1) {
+		if (Head->number == s) Head = NULL;
+	}
+
+	temp = Head;
+	for (int i = 0; i < n; i++) {
+		if (temp == NULL) break;
+		cout << temp->number << ' ';
+		temp = temp->next;
+	}
+
+	delete temp;
+	return 0;
+}

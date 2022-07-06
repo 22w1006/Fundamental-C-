@@ -1,0 +1,52 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+
+struct student {
+	string number, name, gender, age, score, address;
+	student* next = NULL;
+	student* ahead = NULL;
+};
+
+
+int main()
+{
+	//创建Head，判断有无输入
+	student* Head = new student, * Tail = NULL;
+	short flag = 0, len = 0;
+	cin >> Head->number;
+
+	//输入，创建双向动态链表，头尾指针分别为Head、Tail
+	//长度为len
+	student* temp = Head, * follow = NULL;
+	while (true) {
+		if (temp->number.compare("end") == 0) {
+			Tail = temp;
+			temp->ahead = follow;
+			break;
+		}
+		else {
+			cin >> temp->name >> temp->gender >> temp->age >> temp->score >> temp->address;
+			len++;
+			temp->ahead = follow;
+			temp->next = new student;
+			follow = temp;
+			temp = temp->next;
+			cin >> temp->number;
+		}
+	}
+	
+	follow = NULL;
+	if (len != 0) {
+		temp = Tail->ahead;
+	}
+	for (short i = 0; i < len; i++) {
+		cout << temp->number << ' ' << temp->name << ' ' << temp->gender << ' ' <<
+			temp->age << ' ' << temp->score << ' ' << temp->address << endl;
+		temp = temp->ahead;
+	}
+
+
+	return 0;
+}

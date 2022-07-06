@@ -1,0 +1,29 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+int main()
+{
+	int L = 0, M = 0, num = 0;
+	cin >> L >> M;
+	int road[10001] = {};
+	for (int i = 0; i <= L; i++)
+	{
+		road[i] = 1;
+	}
+	for (int i = 0; i < M; i++)
+	{
+		int start = 0, end = 0;
+		cin >> start >> end;
+		for (int j = start; j <= end; j++)
+		{
+			road[j] = 0;
+		}
+	}
+	for (int i = 0; i <= L; i++)
+	{
+		if (road[i] == 1) num++;
+	}
+	cout << num;
+	return 0;
+}

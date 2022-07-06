@@ -1,0 +1,65 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+
+int main()
+{
+	int n = 0, A[101][101] = {};
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cin >> A[i][j];
+		}
+	}
+
+
+	cout << A[1][1] << endl;
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int a = 0; a < n - i; a++) //行归零
+		{
+			int min = A[a][0];
+			for (int b = 0; b < n - i; b++)
+			{
+				if (A[a][b] < min) min = A[a][b];
+			}
+			for (int b = 0; b < n - i; b++)
+			{
+				A[a][b] -= min;
+			}
+		}
+
+		for (int b = 0; b < n - i; b++)  //列归零
+		{
+			int min = A[0][b];
+			for (int a = 0; a < n - i; a++)
+			{
+				if (A[a][b] < min) min = A[a][b];
+			}
+			for (int a = 0; a < n - i; a++)
+			{
+				A[a][b] -= min;
+			}
+		}
+
+		cout << A[1][1] << endl;
+		for (int j = 1; j < n - i; j++)  //上移消减
+		{
+			for (int k = 0; k < n - i; k++)
+			{
+				A[j][k] = A[j + 1][k];
+			}
+		}
+		for (int k = 1; k < n - i; k++)  //左移消减
+		{
+			for (int j = 0; j < n - i; j++)
+			{
+				A[j][k] = A[j][k + 1];
+			}
+		}
+	}
+	return 0;
+}

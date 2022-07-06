@@ -1,0 +1,25 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+
+double notation()
+{
+	char a[10] = {};
+	cin >> a;
+	switch (a[0])
+	{
+	case '+':return notation() + notation(); break;
+	case '-':return notation() - notation(); break;
+	case '*':return notation() * notation(); break;
+	case '/':return notation() / notation(); break;
+	default: return atof(a); break;
+	}
+}
+
+
+int main()
+{
+	printf("%f\n", notation());
+	return 0;
+}

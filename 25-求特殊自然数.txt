@@ -1,0 +1,32 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+
+int main()
+{
+	double n = 0, a = 0, a1 = 0, a2 = 0, a3 = 0, a4 = 0;
+	cin >> n;
+	getchar();
+	for (int i = 0; i < n; i++)
+	{
+		cin >> a;
+		if (a <= 18) a1++;
+		else if (a <= 35) a2++;
+		else if (a <= 60) a3++;
+		else a4++;
+	}
+	double p1 = 0, p2 = 0, p3 = 0, p4 = 0;
+	p1 = 100 * a1 / n;
+	p2 = 100 * a2 / n;
+	p3 = 100 * a3 / n;
+	p4 = 100 * a4 / n;
+	printf("1-18: %.2f", p1);
+	printf("%%\n");
+	printf("19-35: %.2f", p2);
+	printf("%%\n");
+	printf("36-60: %.2f", p3);
+	printf("%%\n");
+	printf("60-: %.2f", p4);
+	printf("%%");
+	return 0;
+}

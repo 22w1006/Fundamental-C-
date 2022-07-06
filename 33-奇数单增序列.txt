@@ -1,0 +1,39 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+int main()
+{
+	int n = 0, flag = 0, a[501] = {}, b[501] = {};
+	cin >> n;
+	getchar();
+	for (int i = 0; i < n; i++)
+	{
+		cin >> a[i];
+		if (a[i] % 2 == 1)
+		{
+			b[flag] = a[i];
+			flag++;
+		}
+	}
+	int fflag = 0, t = 0;
+	while (b[fflag] != 0)
+	{
+		fflag++;
+	}
+	for (int i = 0; i < fflag; i++)
+	{
+		for (int j = 0; j < fflag - i - 1; j++)
+		{
+			if (b[j + 1] < b[j])
+			{
+				t = b[j + 1];
+				b[j + 1] = b[j];
+				b[j] = t;
+			}
+		}
+	}
+	cout << b[0];
+	for (int i = 1; i < fflag; i++) printf(",%d", b[i]);
+	return 0;
+}

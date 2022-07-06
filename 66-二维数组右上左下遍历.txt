@@ -1,0 +1,89 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int m, n;
+	cin >> m >> n;
+	int a[100][100], b[10000] = {};
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			cin >> a[i][j];
+		}
+	}
+
+
+	int* A = NULL, * B = NULL;
+	A = a[0];
+	B = b;
+	int sum = 0;
+
+
+	if (m <= n) {
+		for (int i = 0; i < n; i++) {
+			A = a[0] + i;
+			if (i < m) {
+				for (int j = 0; j < i + 1; j++) {
+					b[sum] = *A;
+					A += 99;
+					sum++;
+				}
+			}
+			else {
+				for (int j = 0; j < m; j++) {
+					b[sum] = *A;
+					A += 99;
+					sum++;
+				}
+			}
+		}
+
+
+		for (int i = 1; i < m; i++) {
+			A = a[0] + 100 * i + n - 1;
+			for (int j = 0; j < m - i; j++) {
+				b[sum] = *A;
+				A += 99;
+				sum++;
+			}
+		}
+	}
+
+	else {
+		for (int i = 0; i < m; i++) {
+			if (i < n) {
+				A = a[0] + i;
+				for (int j = 0; j < i + 1; j++) {
+					b[sum] = *A;
+					A += 99;
+					sum++;
+				}
+			}
+			else {
+				A = a[0] + 100 * (i - n + 1) + n - 1;
+				for (int j = 0; j < n; j++) {
+					b[sum] = *A;
+					A += 99;
+					sum++;
+				}
+			}
+		}
+
+
+		for (int i = 1; i < n; i++) {
+			A = a[0] + 100 * (m - n + i) + n - 1;
+			for (int j = 0; j < n - i; j++) {
+				b[sum] = *A;
+				A += 99;
+				sum++;
+			}
+		}
+	}
+
+
+	for (int i = 0; i < sum; i++) {
+		cout << b[i] << endl;
+	}
+
+	return 0;
+}

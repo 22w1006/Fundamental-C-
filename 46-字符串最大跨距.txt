@@ -1,0 +1,96 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+
+
+int main()
+{
+	char w = ' ';
+	char S[350] = {}, s[300] = {}, s1[10] = {}, s2[10] = {};
+	cin.get(S, 350);
+	int t = 0, len = 0, len0 = 0, len1 = 0, len2 = 0;
+	for (int i = 0; i < 350; i++)
+	{
+		if (S[i] == ',')
+		{
+			t = i + 1;
+			break;
+		}
+		else
+		{
+			s[len] = S[i];
+			len++;
+		}
+	}
+	len0 = len;
+	len = 0;
+	for (int i = t; i < 350; i++)
+	{
+		if (S[i] == ',')
+		{
+			t = i + 1;
+			break;
+		}
+		else
+		{
+			s1[len] = S[i];
+			len++;
+		}
+	}
+	len1 = len;
+	len = 0;
+	for (int i = t; i < 350; i++)
+	{
+		if (S[i] == '\0') break;
+		else
+		{
+			s2[len] = S[i];
+			len++;
+		}
+	}
+	len2 = len;
+
+
+
+	int right = -1, left = -1;
+	int flag = 0;
+	for (int i = 0; i < len0; i++)
+	{
+		flag = 1;
+		for (int j = 0; j < len1; j++)
+		{
+			if (s[i + j] != s1[j])
+			{
+				flag--;
+				break;
+			}
+		}
+		if (flag == 1)
+		{
+			left = i;
+			break;
+		}
+	}
+
+	for (int i = len0 - len2; i >= 0; i--)
+	{
+		flag = 1;
+		for (int j = 0; j < len2; j++)
+		{
+			if (s[i + j] != s2[j])
+			{
+				flag--;
+				break;
+			}
+		}
+		if (flag == 1)
+		{
+			right = i;
+			break;
+		}
+	}
+	if ((right >= left + len1) && (right != -1) && (left != -1)) cout << (right - left - len1);
+	else cout << "-1";
+	return 0;
+}

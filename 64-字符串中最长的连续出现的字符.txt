@@ -1,0 +1,69 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int n = 0;
+	cin >> n;
+	getchar();
+
+	for (int i = 0; i < n; i++) {
+		char a[201] = {}, s = ' ', *p = NULL;
+		cin.get(a, 201);
+		getchar();
+		int len = 0;
+		for (int j = 0; j < 201; j++) {
+			if ((a[j] == '\n') || (a[j] == '\0')) {
+				len = j;
+				break;
+			}
+		}
+	
+		p = a;
+		int flag = 1, max = 0, m = 1;
+		while (true) {
+			if (flag == 0) break;
+			else {
+				flag = 0;
+				for (; p < a + len; p++) {
+					if (s == *p) {
+						m++;
+					}
+					else {
+						s = *p;
+						if (max < m) {
+							max = m;
+							flag++;
+						}
+						m = 1;
+					}
+				}
+				p = a;
+			}
+		}
+			
+		m = 0;
+		s = a[0];
+		for (; p <= a + len; p++) {
+			//cout << max << ' ' << m << endl;
+			if (s == *p) {
+				m++;
+			}
+			else {
+				//cout << "max= "<< max << ' ' <<"m=" << m << endl;
+				if (max == m) {
+					cout << s << ' ' << max;
+					//cout << 1;
+					break;
+				}
+				else {
+					s = *p;
+					m = 1;
+				}
+			}
+		}
+		cout << endl;
+
+	}
+	return 0;
+}

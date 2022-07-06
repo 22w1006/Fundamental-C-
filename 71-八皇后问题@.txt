@@ -1,0 +1,88 @@
+#include<iostream>
+using namespace std;
+
+int chess[20][20] = {};
+int answer = 1;
+
+
+//judge函数，给定已放皇后个数（前c列各一个），判断是否合法
+bool judge(int c) {
+	for (int i = 0; i < c; i++) {
+		//寻找第i列皇后的坐标为（line,i)
+		int line = 0;
+		for (int x = 0; x < 8; x++) {
+			if (chess[x][i] == 1) {
+				line = x;
+				break;
+			}
+		}
+		//判断是否有同一行的皇后
+		for (int j = 0; j < 8; j++) {
+			if (chess[line][j] == 1 && j != i) return false;
+		}
+		//判断是否有同一对角线的皇后
+		//左上-右下
+		for (int t = 1; t < 8; t++) {
+			if (line - t < 0 || i - t < 0) break;
+			if (chess[line - t][i - t] == 1) return false;
+		}
+		for (int t = 1; t < 8; t++) {
+			if (line + t > 7 || i + t > 7) break;
+			if (chess[line + t][i + t] == 1) return false;
+		}
+		//左下-右上
+		for (int t = 1; t < 8; t++) {
+			if (line + t > 7 || i - t < 0) break;
+			if (chess[line + t][i - t] == 1) return false;
+		}
+		for (int t = 1; t < 8; t++) {
+			if (line - t < 0 || i + t > 7) break;
+			if (chess[line - t][i + t] == 1) return false;
+		}
+	}
+	return true;
+}
+
+
+//递归主函数
+bool F(int x) {
+	if (x == 1) {
+		for (int i = 0; i < 8; i++) {
+			chess[i][8 - x] = 1;
+			//判断是否合法
+			//if......true: cout...... then answer++ & return true
+			if (judge(8) == true) {
+				cout << "No. " << answer << endl;
+				for (int a = 0; a < 8; a++) {
+					for (int b = 0; b < 8; b++) {
+						cout << chess[a][b] << ' ';
+					}
+					cout << endl;
+				}
+				answer++;
+				chess[i][8 - x] = 0;
+				return true;
+			}
+			chess[i][8 - x] = 0;
+		}
+	}
+
+	else {
+		for (int i = 0; i < 8; i++) {
+			chess[i][8 - x] = 1;
+			//判断是否合法
+			//if......true: then F(x-1)
+			if (judge(9 - x) == true) {
+				F(x - 1);
+			}
+			chess[i][8 - x] = 0;
+		}
+
+	}
+}
+
+int main()
+{
+	F(8);
+	return 0;
+}

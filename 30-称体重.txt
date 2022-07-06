@@ -1,0 +1,68 @@
+#include<iostream>
+#include<math.h>
+#include<stdlib.h>
+using namespace std;
+
+int main()
+{
+	int alist[6] = {};
+	for (int a = 1; a < 4; a++)
+	{
+		for (int b = 4; b < 6; b++)
+		{
+			for (int c = 1; c < 4; c++)
+			{
+				for (int d = 1; d < 6; d++)
+				{
+					if ((a + b == c + d) && (a + d > b + c) && (a + c < b))
+					{
+						alist[0]=a;
+						alist[1]=b;
+						alist[2]=c;
+						alist[3]=d;
+					}
+				}
+			}
+		}
+	}
+	int flag = 0;
+	while (flag != 4)
+	{
+		int w = 60, wi = 0;
+		for (int i = 0; i < 4; i++)
+		{
+			if (w > alist[i])
+			{
+				w = alist[i];
+				wi = i;
+			}
+		}
+		switch (wi)
+		{
+		case 0: 
+		{
+			printf("z %d\n", w * 10);
+			break;
+		}
+		case 1:
+		{
+			printf("q %d\n", w * 10);
+			break;
+		}
+		case 2:
+		{
+			printf("s %d\n", w * 10);
+			break;
+		}
+		case 3:
+		{
+			printf("l %d\n", w * 10);
+			break;
+		}
+		}
+		alist[wi] = 60;
+		flag++;
+	}
+	
+	return 0;
+}

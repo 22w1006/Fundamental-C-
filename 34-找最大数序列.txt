@@ -1,0 +1,51 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+int main()
+{
+	int n = 0, max = 0, b[31] = {};
+	int a[200] = {};
+	cin >> n;
+	getchar();
+	for (int i = 0; i < n; i++)
+	{
+		int aflag = 0;
+		while (true)
+		{
+			cin >> a[aflag];
+			aflag++;
+			if (getchar() != '\n') continue;
+			else break;
+		}
+		int amax = 0;
+		for (int j = 0; j < aflag; j++)
+		{
+			if (amax < a[j]) amax = a[j];
+		}
+		b[i] = amax;
+	}
+	for (int i = 0; i < n; i++)
+	{
+		if (max < b[i]) max = b[i];
+	}
+	cout << max << endl;
+	int fflag = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if (b[i] == max)
+		{
+			cout << i + 1;
+			fflag = i + 1;
+			break;
+		}
+	}
+	for (int i = fflag; i < n; i++)
+	{
+		if (b[i] == max)
+		{
+			cout << ',' << i + 1;
+		}
+	}
+	return 0;
+}

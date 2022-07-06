@@ -1,0 +1,31 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int good = 0, bad = 0;
+
+int done(int g,int b)
+{
+	int flag = 0;
+	while (b > 0)
+	{
+		b = b - g;
+		g *= 1.05;
+		b *= 2;
+		if (b > 1000000) b = 1000000;
+
+		flag += 1;
+	}
+	return flag;
+}
+
+int main()
+{
+	int n = 0;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> bad >> good;
+		cout << done(good, bad) << endl;
+	}
+	return 0;
+}

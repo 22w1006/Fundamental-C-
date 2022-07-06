@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	double a[10] = { 28.9,32.7,45.6,78,35,86.2,27.8,43,56,65 };
+	int n = 0;
+	int b[11] = {};
+	cin >> n;
+	for(int i=0;i<n;i++)
+	{
+		getchar();
+		double S = 0;
+		for (int j = 0; j < 10; j++)
+		{
+			cin >> b[j];
+			S += a[j] * b[j];
+		}
+		printf("%.2f\n", S);
+	}
+	return 0;
+}

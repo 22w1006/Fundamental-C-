@@ -1,0 +1,61 @@
+#include<iostream>
+using namespace std;
+char a[7] = {}, c[7] = {};
+int b[7] = { 0 };
+
+
+
+void FullArray(char *source, int sourceLen, int *used, int i, int count, char *dest)
+{
+	int index = 0;
+	if (i >= count)
+	{
+		printf("%s\n", dest);
+	}
+	else 
+	{
+		for (index = 0; index < sourceLen; index++) 
+		{
+			if (used[index] == 0)
+			{
+				dest[i] = source[index];
+				used[index] = 1;
+				FullArray(source, sourceLen, used, i + 1, count, dest);
+				used[index] = 0;
+			}
+		}
+	}
+}
+
+int main()
+{
+	//输入
+	int n = 0;
+	for (int i = 0; i < 7; i++)
+	{
+		a[i] = getchar();
+		if (a[i] == '\n')
+		{
+			n = i;
+			break;
+		}
+	}
+
+	//排序
+	for (int i = 0; i < n-1; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (a[i] > a[j])
+			{
+				char s = a[i];
+				a[i] = a[j];
+				a[j] = s;
+			}
+		}
+	}
+
+
+	//全排列
+	FullArray(a, n, b, 0, n, c);
+}

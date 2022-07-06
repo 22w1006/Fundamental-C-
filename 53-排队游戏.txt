@@ -1,0 +1,73 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+int len = 0;
+char a = ' ', b = ' ';
+char s[101] = {};
+int num[51][2] = {};
+
+
+int main()
+{
+	cin >> s;  //输入
+	a = s[0];
+	for (int i = 0; i < 101; i++)
+	{
+		if (a != s[i])
+		{
+			b = s[i];
+			break;
+		}
+	}
+	for (int i = 0; i < 101; i++)
+	{
+		if (s[i] != '\0') len++;
+	}
+
+
+	for (int x = 0; x < len / 2; x++)  //配对、存储编号
+	{
+		int flag = 0;
+		for (int i = 0; i < len - 1; i++)
+		{
+			if (flag != 0) break;
+			if (s[i] == ' ') continue;
+			for (int j = i + 1; j < len; j++)
+			{
+				if (s[j] == ' ') continue;
+				else if (s[j] == a) break;
+				else if (s[j] == b)
+				{
+					s[i] = ' ';
+					s[j] = ' ';
+					num[x][0] = i;
+					num[x][1] = j;
+					flag++;
+					break;
+				}
+			}
+		}
+	}
+
+
+	for (int i = 0; i < len / 2; i++)  //输出
+	{
+		int min = 1000;
+		for (int i = 0; i < len / 2; i++)
+		{
+			if (num[i][1] < min) min = num[i][1];
+		}
+		for (int i = 0; i < len / 2; i++)
+		{
+			if (num[i][1] == min)
+			{
+				printf("%d %d\n", num[i][0], num[i][1]);
+				num[i][1] = 1000;
+				break;
+			}
+		}
+	}
+
+	return 0;
+}

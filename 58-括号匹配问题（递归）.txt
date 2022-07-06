@@ -1,0 +1,83 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+char a[101] = {}, b[101] = {};
+int flag = 0, s = 1;
+
+int done(char a[101], int flag)
+{
+	while (a[flag] != '(')
+	{
+		flag++;
+		if (flag > 100) return 0;
+	}
+	int d = flag;
+	flag++;
+	while ((a[flag] != '(') && (a[flag] != ')'))
+	{
+		flag++;
+		if (flag > 100) return 0;
+	}
+	if (a[flag] == '(')
+	{
+		if (done(a, flag) == 1)
+		{
+			flag = 0;
+			done(a, flag);
+			return 1;
+		}
+	}
+	else if (a[flag] == ')')
+	{
+		a[d] = ' ';
+		a[flag] = ' ';
+		s++;
+		return 1;
+	}
+	return 0;
+}
+
+
+int main()
+{
+	while(cin >> a)
+	{
+		for (int i = 0; i < 100; i++)
+		{
+			b[i] = a[i];
+		}
+
+
+		while (true)
+		{
+			flag = 0;
+			if (done(a, flag) == 0) break;
+		}
+
+
+		for (int i = 0; i < 100; i++)
+		{
+			if (b[i] != '\0') cout << b[i];
+			else break;
+		}
+		cout << endl;
+
+		for (int i = 0; i < 100; i++)
+		{
+			if (a[i] == ')') cout << '?';
+			else if (a[i] == '(') cout << '$';
+			else if (a[i] == '\0') break;
+			else cout << ' ';
+		}
+		cout << endl;
+		for (int i = 0; i < 100; i++)
+		{
+			a[i] = ' ';
+			b[i] = ' ';
+			flag = 0;
+		}
+
+	}
+	return 0;
+}

@@ -1,0 +1,20 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int n = 0, a[101] = {};
+	cin >> n;
+	int *p;
+	p = a;
+	for (; p < a+n; p++)
+	{
+		cin >> *p;
+	}
+	p--;
+	for (; p >= a; p--)
+	{
+		cout << *p << ' ';
+	}
+	return 0;
+}

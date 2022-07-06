@@ -1,0 +1,29 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int A = 0, B = 0, C = 0;
+
+int done()
+{
+	int a = 0, b = 0, c = 0, s = 0;
+	cin >> a >> b >> c;
+	A += a;
+	B += b;
+	C += c;
+	s = a + b + c;
+	return s;
+}
+
+int main()
+{
+	int n = 0;
+	cin >> n;
+	getchar();
+	int sum = 0;
+	for (int i = 0; i < n; i++)
+	{
+		sum += done();
+	}
+	printf("%d %d %d %d", A, B, C, sum);
+	return 0;
+}

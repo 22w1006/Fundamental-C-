@@ -1,0 +1,27 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <cstdlib>
+using namespace std;
+class Complex {
+private:
+    double r, i;
+public:
+    void Print() {
+        cout << r << "+" << i << "i" << endl;
+    }
+    void operator=(const char* x) {
+        const char* p = x;
+        char temp[2][20] = {};
+        sscanf(p, "%[^+-]", temp[0]);
+        sscanf(p, "%*[^+,-]%[^i]", temp[1]);
+        r = atof(temp[0]);
+        i = atof(temp[1]);
+    }
+};
+int main() {
+    Complex a;
+    a = "3.2+4.119i"; a.Print();
+    a = "5+6i"; a.Print();
+    return 0;
+}

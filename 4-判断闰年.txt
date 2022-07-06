@@ -1,0 +1,16 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+int main()
+{
+	double n = 0;
+	cin >> n;
+	if (ceil(n / 4) == floor(n / 4))
+	{
+		if ((ceil(n/100)==floor(n/100))&&(ceil(n/400)!=floor(n/400))) printf("N");
+		else printf("Y");
+	}
+	else printf("N");
+	return 0;
+}

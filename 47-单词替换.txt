@@ -1,0 +1,80 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+void change(char x[100], char y[100], char z[100])  //定义替换函数：若x=y，则将x替换成z
+{
+	int flag = 0;
+	for (int i = 0; i < 100; i++)
+	{
+		if (flag != 0) break;
+		else
+		{
+			if (x[i] != y[i]) flag++;
+			else if (y[i] == '\0') break;
+		}
+	}
+	if (flag == 0)
+	{
+		for (int i = 0; i < 100; i++)
+		{
+			x[i] = z[i];
+		}
+	}
+}
+
+
+
+int main()
+{
+	char s[100][100] = {}, a[100] = {}, b[100] = {}, S[100] = {}; //输入字符串
+	int alen = 0, blen = 0;
+	cin.get(S, 100);
+	for (int i = 0; i < 100; i++)
+	{
+		if (S[i] == ' ')
+		{
+			alen++;
+			blen = 0;
+			continue;
+		}
+		else if (S[i] == '\0') break;
+		else
+		{
+			s[alen][blen] = S[i];
+			blen++;
+		}
+	}
+	alen++;
+
+
+	getchar();  //输入a，b
+	cin.get(a, 100);
+	getchar();
+	cin.get(b, 100);
+
+
+	for(int i = 0; i <= alen; i++)  //执行替换
+	{
+		change(s[i], a, b);
+	}
+
+
+	for (int j = 0; j < 100; j++)   //输出
+	{
+		if (s[0][j] != '\0') cout << s[0][j];
+	}
+
+	for (int i = 1; i < alen; i++) 
+	{
+		cout << ' ';
+		if (s[i][0] == '\0') break;
+		for (int j = 0; j < 100; j++)
+		{
+			if (s[i][j] != '\0') cout << s[i][j];
+		}
+	}
+
+
+	return 0;
+}

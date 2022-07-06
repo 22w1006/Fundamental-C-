@@ -1,0 +1,28 @@
+#include<iostream>
+using namespace std;
+int n;
+
+
+void move(int m, char a, char c, char b)
+{
+	if (m == 2)
+	{
+		printf("%c->1->%c\n", a, c);
+		printf("%c->2->%c\n", a, b);
+		printf("%c->1->%c\n", c, b);
+	}
+	else
+	{
+		move(m - 1, a, b, c);
+		printf("%c->%d->%c\n", a, m, b);
+		move(m - 1, c, a, b);
+	}
+}
+
+int main()
+{
+	char x = ' ', y = ' ', z = ' ';
+	cin >> n >> x >> y >> z;
+	move(n, x, z, y);
+	return 0;
+}

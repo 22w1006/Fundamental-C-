@@ -1,0 +1,25 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+float done()
+{
+	float x = 0, fee = 0;
+	cin >> x;
+	fee = 0.1 * ceil(x / 70);
+	return fee;
+}
+
+int main()
+{
+	int n = 0;
+	cin >> n;
+	getchar();
+	float sum = 0;
+	for (int i = 0; i < n; i++)
+	{
+		sum += done();
+	}
+	printf("%.1f", sum);
+	return 0;
+}

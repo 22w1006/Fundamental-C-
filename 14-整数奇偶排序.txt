@@ -1,0 +1,60 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int a[11] = {};
+
+int main()
+{
+	while (cin >> a[0] >> a[1] >> a[2] >> a[3] >> a[4] >> a[5] >> a[6] >> a[7] >> a[8] >> a[9])
+	{
+		int flag = 0;
+		for (int i = 0; i < 9; i++)
+		{
+			for (int j = 0; j < 9 - i; j++)
+			{
+				if (a[j + 1] > a[j])
+				{
+					int t = 0;
+					t = a[j];
+					a[j] = a[j + 1];
+					a[j + 1] = t;
+				}
+			}
+		}
+		for (int k = 0; k < 10; k++)
+		{
+			if (((float)a[k]) / 2 != (a[k] / 2))
+			{
+				if (flag == 0)
+				{
+					cout << a[k];
+					flag++;
+				}
+				else
+				{
+					cout << ' ' << a[k];
+					flag++;
+				}
+				
+			}
+		}
+		for (int k = 9; k >= 0; k--)
+		{
+			if (((float)a[k]) / 2 == (a[k] / 2))
+			{
+				if (flag == 0)
+				{
+					cout << a[k];
+					flag++;
+				}
+				else
+				{
+					cout << ' ' << a[k];
+					flag++;
+				}
+			}
+		}
+		cout << endl;
+	}
+	return 0;
+}

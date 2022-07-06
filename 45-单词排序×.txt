@@ -1,0 +1,141 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+
+int main()
+{
+	char s[5001] = {}, a[101][51] = {};
+	cin.get(s, 5001);
+	for (int i = 0; i < 5001; i++)
+	{
+		if (s[i] == '\0') break;
+		else
+		{
+			if ((s[i] == ' ') && (s[i + 1] == ' '))
+			{
+				for (int j = i; j < 5001; j++)
+				{
+					if (s[j] == '\0') break;
+					else s[j] = s[j + 1];
+				}
+				i--;
+			}
+		}
+	}
+
+
+	int num = 0, len = 0;
+	for (int i = 0; i < 5001; i++)  //输入与拆分
+	{
+		if (s[i] == '\0') break;
+		else
+		{
+			if (s[i] == ' ')
+			{
+				num++;
+				len = 0;
+			}
+			else
+			{
+				a[num][len] = s[i];
+				len++;
+			}
+		}
+	}
+
+
+
+	for (int i = 0; i < num; i++) //标记重复项
+	{
+		for (int j = i + 1; j <= num; j++)
+		{
+			int flag = 1;
+			for (int n = 0; n < 50; n++)
+			{
+				if ((a[i][n] == ' ') && (a[j][n] == ' ')) break;
+				else if (a[i][n] != a[j][n])
+				{
+					flag--;
+					break;
+				}
+			}
+			if(flag==1) a[j][0]=' ';
+		}
+	}
+
+
+	int Num = num;
+	for (int i = 0; i <= num; i++)  //删除标记项
+	{
+		if (a[i][0] == ' ')
+		{
+			for (int j = i; j <= num; j++)
+			{
+				for (int n = 0; n < 50; n++)
+				{
+					a[j][n] = a[j + 1][n];
+				}
+			}
+			i--;
+			Num--;
+		}
+	}
+
+
+
+
+	char t = ' ';  
+	for (int i = 0; i < Num; i++)  //字典序排序
+	{
+		for (int j = 0; j < Num - i; j++)
+		{
+			int n = 0, flag = 0;
+			while (true)
+			{
+				if (a[j][n] != a[j + 1][n]) break;
+				else
+				{
+					if (a[j][n] == ' ') flag++;
+					else if (a[j + 1][n] == ' ') flag--;
+				}
+				n++;
+			}
+
+			if (flag == 0)
+			{
+				if ((int)a[j][n] > (int)a[j + 1][n]) flag++;
+				else flag--;
+			}
+
+			if (flag > 0)
+			{
+				for (int x = 0; x < 50; x++)
+				{
+					t = a[j][x];
+					a[j][x] = a[j + 1][x];
+					a[j + 1][x] = t;
+				}
+			}
+		}
+	}
+	
+
+
+	for (int i = 0; i < Num; i++) //输出
+	{
+		for (int j = 0; j < 50; j++)
+		{
+			if (a[i][j] == ' ') break;
+			else cout << a[i][j];
+		}
+		cout << endl;
+	}
+	for (int j = 0; j < 50; j++)
+	{
+		if (a[Num][j] == ' ') break;
+		else cout << a[Num][j];
+	}
+
+	return 0;
+}

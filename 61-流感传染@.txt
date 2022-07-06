@@ -1,0 +1,78 @@
+#include<iostream>
+using namespace std;
+char a[102][102] = {}, b[102][102] = {};
+
+
+int copy(int n, char x[102][102], char y[102][102]) //x->y
+{
+	for (int j = 0; j < n; j++)
+	{
+		for (int k = 0; k < n; k++)
+		{
+			y[j][k] = x[j][k];
+		}
+	}
+	return 0;
+}
+
+void spread(int c, int x, int y, char s[102][102]) //边值为c的二维数组s，在(x,y)处出现感染的传播函数
+{
+	if (x - 1 >= 0)
+	{
+		if (s[x - 1][y] == '.') s[x - 1][y] = '@';
+	}
+	if (y - 1 >= 0)
+	{
+		if (s[x][y - 1] == '.') s[x][y - 1] = '@';
+	}
+	if (s[x][y + 1] == '.') s[x][y + 1] = '@';
+	if (s[x + 1][y] == '.') s[x + 1][y] = '@';
+}
+
+
+int main()
+{
+	int n = 0, m = 0;
+	cin >> n;
+
+	for (int i = 0; i < n; i++)
+	{
+		cin >> a[i];
+	}
+	cin >> m;
+	m--;
+	copy(n, a, b);   //赋值
+
+	for (int i = 0; i < m; i++)  //a是遍历的模板，b是变化的对象，每天后把b复制给a
+	{
+		for (int ii = 0; ii < n; ii++)
+		{
+			for (int iii = 0; iii < n; iii++)
+			{
+				if (a[ii][iii] == '@') spread(n, ii, iii, b);
+			}
+		}
+		copy(n, b, a);
+	}
+
+	//输出
+	for (int j = 0; j < n; j++)
+	{
+		for (int k = 0; k < n; k++)
+		{
+			cout << a[j][k];
+		}
+		cout << endl;
+	}
+	int x = 0;
+	for (int j = 0; j < n; j++)
+	{
+		for (int k = 0; k < n; k++)
+		{
+			if (a[j][k] == '@') x++;
+		}
+	}
+	cout << x << endl;
+
+	return 0;
+}

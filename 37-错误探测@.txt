@@ -1,0 +1,75 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+
+int main()
+{
+	while (true)
+	{
+		int n = 0;
+		cin >> n;
+		if (n == 0) break;
+		int a[101][101] = {};  //定义并赋值矩阵数组
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				cin >> a[i][j];
+			}
+		}
+
+
+		int flag = 0;  //判断是否满足要求
+		for (int i = 0; i < n; i++)
+		{
+			int asum = 0, bsum = 0;
+			for (int j = 0; j < n; j++)
+			{
+				asum += a[i][j];
+				bsum += a[j][i];
+			}
+			if ((asum % 2 == 1) || (bsum % 2 == 1)) flag = 1;
+		}
+		if (flag == 0) printf("OK\n");
+
+
+		else
+		{
+			int bflag = 0;
+			for (int i = 0; i < n; i++)
+			{
+				if (bflag == 1) break;
+				else
+				{
+					for (int j = 0; j < n; j++)
+					{
+						int t = 0;
+						t = a[i][j];
+						if (a[i][j] == 0) a[i][j]++;
+						else a[i][j]--;
+						int flag = 0;  //判断修改后是否满足要求
+						for (int I = 0; I < n; I++)
+						{
+							int asum = 0, bsum = 0;
+							for (int J = 0; J < n; J++)
+							{
+								asum += a[I][J];
+								bsum += a[J][I];
+							}
+							if ((asum % 2 == 1) || (bsum % 2 == 1)) flag = 1;
+						}
+						if (flag == 0)
+						{
+							bflag = 1;
+							printf("Change bit (%d,%d)\n", i + 1, j + 1);
+						}
+						else a[i][j] = t;
+					}
+				}
+			}
+			if (bflag == 0) printf("Corrupt\n");
+		}
+	}
+	return 0;
+}

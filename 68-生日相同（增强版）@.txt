@@ -1,0 +1,113 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+
+
+struct student {
+	char name[20] = {};
+	int month = 0, day = 0;
+};
+
+
+//全局变量a，开内存
+student a[180] = {};
+
+
+//给出地址，交换两元素
+void swap(int* p1, int* p2) {
+	int t = 0;
+	t = *p1;
+	*p1 = *p2;
+	*p2 = t;
+}
+
+//给俩指针，比较字符串大小，返回bool值
+bool function(int* q1, int* q2) {
+	char* str1 = a[*q1].name;
+	char* str2 = a[*q2].name;
+	if (strlen(str1) < strlen(str2)) return true;
+	else if (strlen(str1) == strlen(str2)) {
+		for (int x = 0; x < strlen(str1); x++){
+			if (*(str1 + x) < *(str2 + x)) return true;
+			else if (*(str1 + x) > *(str2 + x)) return false;
+			}
+	}
+	else return false;
+}
+
+//字典序排序
+int sort(int *p) {
+	int outlen = 1;
+	for (int i = 1; i < 180; i++) {
+		if (*(p + i) <= 0) break;
+		outlen++;
+	}
+	for (int i = 0; i < outlen - 1; i++) {
+		for (int j = i + 1; j < outlen; j++) {
+			if (function(p + i, p + j)==false) swap(p+i,p+j);
+		}
+	}
+	return outlen;
+}
+
+
+int main()
+{
+	//输入，创建结构体
+	int n;
+	cin >> n;
+	for(int i=0;i<n;i++){
+		cin >> a[i].name >> a[i].month >> a[i].day;
+	}
+
+	//遍历结构体数组，把 m月d日生日的人的下标 存到out[m][d]数组里
+	//out数组初始化为-1
+	int out[13][32][180] = {};
+	for (int i = 0; i < 13; i++) {
+		for (int j = 0; j < 32; j++) {
+			for (int k = 0; k < 180; k++) {
+				out[i][j][k] = -1;
+			}
+		}
+	}
+
+
+	for (int m = 1; m <= 12; m++) {
+		for (int d = 1; d <= 31; d++) {
+			for (int i = 0; i < n; i++) {
+				if (a[i].month == m && a[i].day == d) {
+					int flag = 0;
+					while (out[m][d][flag] != -1) {
+						flag++;
+					}
+					out[m][d][flag] = i;
+				}
+			}
+		}
+	}
+
+
+
+	int Flag = 0;
+	//遍历out数组，输出
+	for (int m = 1; m <= 12; m++) {
+		for (int d = 1; d <= 31; d++) {
+			if (out[m][d][1] != -1) {
+				int flag = 0;
+				//排序
+				int len = sort(out[m][d]);
+				//输出
+				cout << m << ' ' << d << ' ';
+				for (int flag = 0; flag < len; flag++) {
+					Flag++;
+					cout << a[out[m][d][flag]].name << ' ';
+				}
+				cout << endl;
+			}
+		}
+	}
+
+	if (Flag == 0) cout << "None" << endl;
+
+	return 0;
+}

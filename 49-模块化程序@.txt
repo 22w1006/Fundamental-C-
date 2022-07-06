@@ -1,0 +1,86 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+int x = 0, y = 0;
+int a[100] = {}, b[100] = {}, c[200] = {};
+
+
+void Fa()  //读取两个整数数组，数组的元素未经排序。
+{
+	cin >> x >> y;
+	for (int i = 0; i < x; i++)
+	{
+		cin >> a[i];
+	}
+	getchar();
+	for (int i = 0; i < y; i++)
+	{
+		cin >> b[i];
+	}
+}
+
+
+void Fb(int x, int y, int a[100], int b[100])  //将数组元素按递增排序。
+{
+	for (int i = 0; i < x - 1; i++)
+	{
+		for (int j = 0; j < x - 1 - i; j++)
+		{
+			if (a[j] > a[j + 1])
+			{
+				int t = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = t;
+			}
+		}
+	}
+	for (int i = 0; i < y - 1; i++)
+	{
+		for (int j = 0; j < y - 1 - i; j++)
+		{
+			if (b[j] > b[j + 1])
+			{
+				int t = b[j];
+				b[j] = b[j + 1];
+				b[j + 1] = t;
+			}
+		}
+	}
+}
+
+
+void Fc(int x, int y, int a[100], int b[100])  //将数组元素按递增排序。
+{
+	for (int i = 0; i < x; i++)
+	{
+		c[i] = a[i];
+	}
+	for (int i = 0; i < y; i++)
+	{
+		c[x + i] = b[i];
+	}
+}
+
+
+void Fd(int c[200])  //显示已排序的列表。
+{
+	cout << c[0];
+	for (int i = 1; i < 200; i++)
+	{
+		if (c[i] != '\0')
+		{
+			cout << ' ' << c[i];
+		}
+	}
+}
+
+
+int main()
+{
+	Fa();
+	Fb(x, y, a, b);
+	Fc(x, y, a, b);
+	Fd(c);
+	return 0;
+}

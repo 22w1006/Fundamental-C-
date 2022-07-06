@@ -1,0 +1,38 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+
+int main()
+{
+	char s[501] = {}, a[501][501] = {};
+	int len = 0, llen = 0, max = 0, maxlen = 0;
+	cin.get(s, 501);
+	for (int i = 0; i < 501; i++)
+	{
+		if ((s[i] == ' ') || (s[i] == '.'))
+		{
+			if (llen > max)
+			{
+				max = llen;
+				maxlen = len;
+			}
+			len++;
+			llen = 0;
+		}
+		else
+		{
+			a[len][llen] = s[i];
+			llen++;
+		}
+		if (s[i] == '.') break;
+	}
+
+
+
+	for (int i = 0; i < max; i++)
+	{
+		cout << a[maxlen][i];
+	}
+	return 0;
+}

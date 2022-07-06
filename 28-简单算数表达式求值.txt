@@ -1,0 +1,49 @@
+#include<iostream>
+#include<math.h>
+#include<stdlib.h>
+using namespace std;
+
+int main()
+{
+	char a1 = 0, a2 = 0, b1 = 0, b2 = 0, s = 0;
+	int A = 0, B = 0, cons = 0;
+	cin.get(a1);
+	cin.get(a2);
+	cin.get(s);
+	if (s == ' ') cin.get(s);
+	cin.get(b1);
+	if (b1 == ' ') cin.get(b1);
+	cin.get(b2);
+	A = (a1 - 48) * 10 + (a2 - 48);
+	B = (b1 - 48) * 10 + (b2 - 48);
+	switch (s)
+	{
+	case'+':
+	{
+		cons = A + B;
+		break;
+	}
+	case'-':
+	{
+		cons = A - B;
+		break;
+	}
+	case'*':
+	{
+		cons = A * B;
+		break;
+	}
+	case'/':
+	{
+		cons = A / B;
+		break;
+	}
+	case'%':
+	{
+		cons = A % B;
+		break;
+	}
+	}
+	cout << cons;
+	return 0;
+}

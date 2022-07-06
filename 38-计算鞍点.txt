@@ -1,0 +1,45 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+
+int main()
+{
+	int a[5][5] = {};
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			cin >> a[i][j];
+		}
+	}
+	 
+
+	int bflag = 0;
+	for (int i = 0; i < 5; i++)
+	{
+		int max = 0;
+		for (int j = 0; j < 5; j++)
+		{
+			if (a[i][j] > max) max = a[i][j];
+		}
+		for (int j = 0; j < 5; j++)
+		{
+			if (a[i][j] == max)
+			{
+				int flag = 0;
+				for (int k = 0; k < 5; k++)
+				{
+					if (a[k][j] < max) flag++;
+				}
+				if (flag == 0)
+				{
+					printf("%d %d %d\n", i + 1, j + 1, max);
+					bflag++;
+				}
+			}
+		}
+	}
+	if (bflag == 0) printf("not found\n");
+	return 0;
+}
